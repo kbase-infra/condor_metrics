@@ -1,0 +1,17 @@
+version: '1'
+
+# This docker-compose is for developer convenience, not for running in production.
+# To use it, run brew install podman-compose
+services:
+  condor_metrics_sleep:
+    build:
+      context: .
+      args:
+        - VCS_REF=$(git rev-parse HEAD)
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+    env_file:
+      - .env
+    entrypoint: /bin/sleep
+    command: infinity
